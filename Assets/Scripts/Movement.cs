@@ -32,13 +32,17 @@ public class Movement : MonoBehaviour {
 
 		//walking
 		if (Input.GetKey (KeyCode.D)) {
-			GetComponent<Animator> ().SetBool ("Running", true);
+			if (isGrounded == true) {
+				GetComponent<Animator> ().SetBool ("Running", true);
+			}
 			GetComponent<Rigidbody2D> ().velocity = new Vector2 (walkSpeed, GetComponent<Rigidbody2D> ().velocity.y);
 			transform.localRotation = Quaternion.Euler (0, 0, 0);
 			GetComponent<Animator> ().SetBool ("Idle", false);
 		}  
 		else if (Input.GetKey (KeyCode.A)) {
-			GetComponent<Animator> ().SetBool ("Running", true);
+			if (isGrounded == true) {
+				GetComponent<Animator> ().SetBool ("Running", true);
+			}
 			GetComponent<Rigidbody2D> ().velocity = new Vector2 (-walkSpeed, GetComponent<Rigidbody2D> ().velocity.y);
 			transform.localRotation = Quaternion.Euler (0, 180, 0);
 			GetComponent<Animator> ().SetBool ("Idle", false);
@@ -47,6 +51,7 @@ public class Movement : MonoBehaviour {
 		else {
 			GetComponent<Animator> ().SetBool ("Idle", true);
 			GetComponent<Animator> ().SetBool ("Running", false);
+			GetComponent<Animator> ().SetBool ("falling", false);
 			GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, GetComponent<Rigidbody2D> ().velocity.y);
 		}
 
